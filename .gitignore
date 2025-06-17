@@ -1,0 +1,55 @@
+# IDE и редакторы
+.vscode/
+.qtc_clangd/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# C++
+*.o
+*.obj
+*.exe
+*.out
+*.app/
+*.dSYM/
+
+# Qt
+*.pro.user
+*.pro.user.*
+.qmake.stash
+moc_*.cpp
+moc_*.h
+ui_*.h
+qrc_*.cpp
+*.qm
+*.ts
+
+# Сборка
+*/build/
+build/
+*/obj/
+obj/
+Makefile
+compile_commands.json
+
+# Кэш
+.cache/
+.clangd/
+
+# Временные файлы
+*.tmp
+*.bak
+*.backup
+*~
+
+# Логи
+*.log
+
+# Собранные приложения
+app.exe
+*.exe

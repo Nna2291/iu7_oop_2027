@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <!-- Размеры окна можно подкорректировать при необходимости -->
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1080</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+
+  <!-- Общий стиль (StyleSheet) приложения -->
+  <property name="styleSheet">
+   <string notr="true">
+   /* Общий фон окна и базовый цвет текста */
+   QMainWindow {
+       background-color: #f3f3f3;
+       color: #000000; /* чёрный текст по умолчанию */
+   }
+
+   /* Стили для GroupBox */
+   QGroupBox {
+       font-weight: bold;
+       border: 2px solid #ddd;
+       border-radius: 6px;
+       margin-top: 1em; /* отступ между заголовком и рамкой */
+       background-color: #ffffff;
+       color: #000000;
+   }
+   QGroupBox::title {
+       subcontrol-origin: margin;
+       subcontrol-position: top center;
+       padding: 0px 6px;
+       background-color: transparent;
+   }
+
+   /* Стили для QLabel (по умолчанию) */
+   QLabel {
+       font-size: 14px;
+       color: #000000;
+   }
+
+   /*
+    * Дополнительный стиль рамок для
+    *  - dx, dy, dz (#label_14, #label_15, #label_13)
+    *  - angle x, angle y, angle z (#label_5, #label_4, #label_6)
+    *  - kx, ky, kz (#label_3, #label_2, #label_kz)
+    * Cюда добавлены отступы, лёгкое закругление, светлый фон и центрирование текста.
+    */
+   #label_14, #label_15, #label_13,
+   #label_5, #label_4, #label_6,
+   #label_3, #label_2, #label_kz {
+       border: 1px solid #ddd;
+       border-radius: 4px;
+       background-color: #fafafa;
+       padding: 4px 8px;
+       margin: 2px;
+       font-weight: 500;
+       qproperty-alignment: 'AlignCenter'; /* центрируем текст */
+   }
+
+   /* Стили для кнопок (QPushButton) */
+   QPushButton {
+       background-color: #4caf50; /* приятный зелёный цвет */
+       color: #ffffff;           /* белый текст */
+       border-radius: 6px;
+       padding: 8px;
+       font-size: 14px;
+   }
+   QPushButton:hover {
+       background-color: #43a047; /* чуть темнее при наведении */
+   }
+   QPushButton:pressed {
+       background-color: #388e3c; /* ещё темнее при нажатии */
+   }
+
+   /* Стили для QDoubleSpinBox */
+   QDoubleSpinBox {
+       border: 1px solid #bfbfbf;
+       border-radius: 4px;
+       padding: 4px;
+       font-size: 14px;
+       background-color: #ffffff;
+       color: #000000;
+   }
+   QDoubleSpinBox:focus {
+       border: 1px solid #4caf50; /* цвет рамки при фокусе */
+   }
+
+   /* Стили для QGraphicsView */
+   QGraphicsView {
+       border: 1px solid #ccc;
+       background-color: #eaeaea;
+   }
+
+   /* Стили для меню (QMenuBar и QMenu) */
+   QMenuBar {
+       background-color: #e0e0e0;
+       color: #000000;
+   }
+   QMenuBar::item {
+       background: transparent;
+       color: #000000;
+       padding: 4px 10px;
+   }
+   QMenuBar::item:selected {
+       background: #4caf50;
+       color: #ffffff;
+       border-radius: 4px;
+   }
+   QMenu {
+       background-color: #ffffff;
+       border: 1px solid #ccc;
+       color: #000000;
+   }
+   QMenu::item {
+       color: #000000;
+       padding: 4px 20px;
+   }
+   QMenu::item:selected {
+       background-color: #4caf50;
+       color: #ffffff;
+   }
+   </string>
+  </property>
+
+  <!-- Центральный виджет -->
+  <widget class="QWidget" name="centralwidget">
+   <!-- Первая группа: Перенос -->
+   <widget class="QGroupBox" name="groupBox">
+    <!-- Координаты и размеры -->
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>300</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Перенос</string>
+    </property>
+
+    <widget class="QPushButton" name="buttonMove">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>281</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Перенести</string>
+     </property>
+    </widget>
+
+    <widget class="QWidget" name="horizontalLayoutWidget_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>281</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <item>
+       <widget class="QDoubleSpinBox" name="move_x_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>10000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="move_y_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>10000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="move_z_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>10000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+
+    <!-- Пустые лейблы (label_12, label_10, label_11) оставлены, если они нужны в коде -->
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>125</width>
+       <height>49</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>142</x>
+       <y>40</y>
+       <width>125</width>
+       <height>49</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>274</x>
+       <y>40</y>
+       <width>125</width>
+       <height>49</height>
+      </rect>
+     </property>
+    </widget>
+
+    <!-- Подписи dx, dy, dz -->
+    <widget class="QWidget" name="horizontalLayoutWidget_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>281</width>
+       <height>46</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <item>
+       <widget class="QLabel" name="label_14">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>dx</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_15">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>dy</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>dz</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+
+   <!-- Вторая группа: Поворот -->
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>10</y>
+      <width>300</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Поворот</string>
+    </property>
+
+    <widget class="QPushButton" name="buttonRotate">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>281</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Повернуть</string>
+     </property>
+    </widget>
+
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>110</y>
+       <width>281</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QDoubleSpinBox" name="angle_x_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="angle_y_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="angle_z_boz">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+
+    <!-- Подписи angle x, angle y, angle z -->
+    <widget class="QWidget" name="horizontalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>281</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>angle x</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>angle y</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>angle z</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+
+   <!-- Третья группа: Масштабирование -->
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>10</y>
+      <width>300</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Масштабирование</string>
+    </property>
+
+    <widget class="QPushButton" name="buttonScale">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>281</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Промасштабировать</string>
+     </property>
+    </widget>
+
+    <!-- Поля для ввода kx, ky, kz -->
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>90</y>
+       <width>281</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QDoubleSpinBox" name="scale_x_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="scale_y_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="scale_z_box">
+        <property name="minimum">
+         <double>-1000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+
+    <widget class="QWidget" name="horizontalLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>281</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>kx</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ky</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <!-- Изменили objectName c "label" на "label_kz",
+            чтобы стиль #label_kz корректно применился -->
+       <widget class="QLabel" name="label_kz">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>kz</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+
+   <!-- Область для рисования (GraphicsView) - расположим ниже -->
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>920</width>
+      <height>511</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+
+  <!-- Меню и статус-бар -->
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1080</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actionOpen_file"/>
+    <addaction name="actionSave_file"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+
+  <!-- Действия (Actions) меню -->
+  <action name="actionOpen_file">
+   <property name="text">
+    <string>Загрузить файл</string>
+   </property>
+  </action>
+  <action name="actionSave_file">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

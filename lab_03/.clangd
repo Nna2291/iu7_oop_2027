@@ -1,0 +1,29 @@
+CompileFlags:
+  Add: 
+    - -std=c++20
+    - -Wall
+    - -Wextra
+    - -Wpedantic
+    - -g
+    - -O0
+  Remove: 
+    - -Werror
+    - -Wno-unknown-warning-option
+    - -fcolor-diagnostics
+    - -fansi-escape-codes
+  
+Diagnostics:
+  Suppress: 
+    - exception-spec
+    - inconsistent-missing-override
+    - unused-parameter
+    - sign-compare
+    
+InlayHints:
+  Enabled: false
+  
+Hover:
+  ShowAKA: false
+  
+Completion:
+  AllScopes: true 

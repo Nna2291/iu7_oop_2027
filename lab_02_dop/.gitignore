@@ -1,0 +1,7 @@
+app
+*.exe
+*.json
+*.o
+**/.DS_Store
+.cache
+build/
